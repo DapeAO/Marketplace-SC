@@ -1,0 +1,267 @@
+{
+    "buildInfo": {
+        "rustc": {
+            "version": "1.67.0-nightly",
+            "commitHash": "c090c6880c0183ba248bde4a16e29ba29ac4fbba",
+            "commitDate": "2022-12-01",
+            "channel": "Nightly",
+            "short": "rustc 1.67.0-nightly (c090c6880 2022-12-01)"
+        },
+        "contractCrate": {
+            "name": "marketplace",
+            "version": "0.0.0"
+        },
+        "framework": {
+            "name": "elrond-wasm",
+            "version": "0.36.1"
+        }
+    },
+    "name": "Marketplace",
+    "constructor": {
+        "inputs": [],
+        "outputs": []
+    },
+    "endpoints": [
+        {
+            "name": "withdrawBalance",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [],
+            "outputs": []
+        },
+        {
+            "name": "createDapeAOOffer",
+            "mutability": "mutable",
+            "payableInTokens": [
+                "*"
+            ],
+            "inputs": [
+                {
+                    "name": "amount",
+                    "type": "BigUint"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "u64"
+                }
+            ]
+        },
+        {
+            "name": "createFreeFeesOffer",
+            "mutability": "mutable",
+            "payableInTokens": [
+                "*"
+            ],
+            "inputs": [
+                {
+                    "name": "amount",
+                    "type": "BigUint"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "u64"
+                }
+            ]
+        },
+        {
+            "name": "deleteOffer",
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "id",
+                    "type": "u64"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "u64"
+                }
+            ]
+        },
+        {
+            "name": "acceptOffer",
+            "mutability": "mutable",
+            "payableInTokens": [
+                "EGLD"
+            ],
+            "inputs": [
+                {
+                    "name": "id",
+                    "type": "u64"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "u64"
+                }
+            ]
+        },
+        {
+            "name": "getOffersSubmittedFrom",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "caller",
+                    "type": "Address"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "List<u64>"
+                }
+            ]
+        },
+        {
+            "name": "getAllDapeAOSubmittedOffers",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "List<u64>"
+                }
+            ]
+        },
+        {
+            "name": "getAllFreeFeesSubmittedOffers",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "List<u64>"
+                }
+            ]
+        },
+        {
+            "name": "getAllDapeAOBoughtOffers",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "List<u64>"
+                }
+            ]
+        },
+        {
+            "name": "getOffersCount",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "u64"
+                }
+            ]
+        },
+        {
+            "name": "getOffersWithId",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "id",
+                    "type": "u64"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "Offer"
+                }
+            ]
+        },
+        {
+            "name": "getOffersFrom",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "address",
+                    "type": "Address"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "List<u64>"
+                }
+            ]
+        },
+        {
+            "name": "getAllOffers",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "List<u64>"
+                }
+            ]
+        },
+        {
+            "name": "getAllDapeAOOffers",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "List<u64>"
+                }
+            ]
+        },
+        {
+            "name": "getAllFreeFeesOffers",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "List<u64>"
+                }
+            ]
+        }
+    ],
+    "events": [],
+    "hasCallback": false,
+    "types": {
+        "Offer": {
+            "type": "struct",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "u64"
+                },
+                {
+                    "name": "nft_holder",
+                    "type": "Address"
+                },
+                {
+                    "name": "amount",
+                    "type": "BigUint"
+                },
+                {
+                    "name": "token_id",
+                    "type": "EgldOrEsdtTokenIdentifier"
+                },
+                {
+                    "name": "nonce",
+                    "type": "u64"
+                },
+                {
+                    "name": "status",
+                    "type": "Status"
+                }
+            ]
+        },
+        "Status": {
+            "type": "enum",
+            "variants": [
+                {
+                    "name": "Submitted",
+                    "discriminant": 0
+                },
+                {
+                    "name": "Completed",
+                    "discriminant": 1
+                },
+                {
+                    "name": "Deleted",
+                    "discriminant": 2
+                }
+            ]
+        }
+    }
+}
